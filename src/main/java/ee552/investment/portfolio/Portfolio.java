@@ -19,6 +19,14 @@ public class Portfolio {
         this.originalPrices = originalPrices;
     }
 
+    public float getTotalValueOfStocks() {
+        float tot = 0;
+        for (int i = 0; i < stocks.size(); i++) {
+            tot += this.positions.get(i) * this.stocks.get(i).getCurrentPrice();
+        }
+        return tot;
+    }
+
     public float getPercentChangeByIndex(int index) {
         float currentValue = this.getCurrentValueOfAPositionByIndex(index);
         float originalPrice = this.originalPrices.get(index);
