@@ -1,4 +1,4 @@
-package ee552.investment.portfolio;
+package ee552.portfolio;
 
 import java.util.ArrayList;
 
