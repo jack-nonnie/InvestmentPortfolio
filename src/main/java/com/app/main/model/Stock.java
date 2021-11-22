@@ -1,4 +1,4 @@
-package ee552.portfolio;
+package com.app.main.model;
 
 public class Stock {
   private String ticker;
