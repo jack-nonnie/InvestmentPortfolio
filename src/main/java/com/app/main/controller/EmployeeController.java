@@ -22,9 +22,9 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 	
 	// display list of employees
-	@GetMapping("/")
-	public String viewHomePage(Model model) {
-		return findPaginated(1, "firstName", "asc", model);		
+	@GetMapping("/employees")
+	public String viewEmployeePage(Model model) {
+		return findPaginatedEmployee(1, "firstName", "asc", model);
 	}
 	
 	@GetMapping("/showNewEmployeeForm")
@@ -62,8 +62,8 @@ public class EmployeeController {
 	}
 	
 	
-	@GetMapping("/page/{pageNo}")
-	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
+	@GetMapping("/employeepage/{pageNo}")
+	public String findPaginatedEmployee(@PathVariable (value = "pageNo") int pageNo, 
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
 			Model model) {

@@ -3,17 +3,17 @@ package com.app.main.model;
 import java.util.ArrayList;
 
 public class Portfolio {
-    private ArrayList<Stock> stocks;
+    private ArrayList<Stock_old> stocks;
     private ArrayList<Float> positions;
     private ArrayList<Float> originalPrices;
 
     public Portfolio() {
-        this.stocks = new ArrayList<Stock>();
+        this.stocks = new ArrayList<Stock_old>();
         this.positions = new ArrayList<Float>();
         this.originalPrices = new ArrayList<Float>();
     }
 
-    public Portfolio(ArrayList<Stock> stocks, ArrayList<Float> positions, ArrayList<Float> originalPrices) {
+    public Portfolio(ArrayList<Stock_old> stocks, ArrayList<Float> positions, ArrayList<Float> originalPrices) {
         this.stocks = stocks;
         this.positions = positions;
         this.originalPrices = originalPrices;
@@ -58,18 +58,18 @@ public class Portfolio {
         return this.positions.get(index);
     }
 
-    public Stock getStockByIndex(int index) {
+    public Stock_old getStockByIndex(int index) {
         if (index >= this.stocks.size() || index < 0) {
             return null;
         }
         return this.stocks.get(index);
     }
 
-    public void updateStocks(ArrayList<Stock> stocks) {
+    public void updateStocks(ArrayList<Stock_old> stocks) {
         this.stocks = stocks;
     }
 
-    public void sellPosition(Stock stock, float position, float originalPrice) {
+    public void sellPosition(Stock_old stock, float position, float originalPrice) {
         // need to implement the conversion to cash
         for (int i = 0; i < stocks.size(); i++) {
             if (this.stocks.get(i) == stock) {
@@ -89,7 +89,7 @@ public class Portfolio {
         }
     }
 
-    public void addPosition(Stock stock, float position, float originalPrice) {
+    public void addPosition(Stock_old stock, float position, float originalPrice) {
         boolean added = false;
         for (int i = 0; i < stocks.size(); i++) {
             if (this.stocks.get(i) == stock) {

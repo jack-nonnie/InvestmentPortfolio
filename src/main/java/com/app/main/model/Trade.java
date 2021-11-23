@@ -8,15 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "stocks")
-public class Stock {
-
-    // public Stock() {}
-
-    // public Stock(String symbol, String price) {
-    //     this.symbol = symbol;
-    //     this.price = price;
-    // }
+@Table(name = "trade")
+public class Trade {
 	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -27,6 +20,12 @@ public class Stock {
 	
 	@Column(name = "price")
 	private String price;
+	
+	@Column(name = "cash")
+	private String cash;
+
+    @Column(name = "amount")
+	private String amount;
 
     public long getId() {
         return this.id;
@@ -50,5 +49,21 @@ public class Stock {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getCash() {
+		return this.cash;
+	}
+
+	public void setCash(String cash) {
+		this.cash = cash;
+	}
+
+    public String getAmount() {
+        return this.amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 }

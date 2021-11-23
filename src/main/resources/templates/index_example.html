@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Investment Portfolio</title>
+<title>Employee Management System</title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -13,29 +13,35 @@
 <body>
 
 	<div class="container my-2">
-	<h1>Stock List</h1>
+	<h1>Employees List</h1>
 	
-	<a th:href = "@{/trade}" class="btn btn-primary btn-sm mb-3"> Portfolio </a>
+	<a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add Employee </a>
 	
 		<table border="1" class = "table table-striped table-responsive-md">
 			<thead>
 				<tr>
 					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=symbol&sortDir=' + ${reverseSortDir}}">
-							Symbol</a>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+							Employee First Name</a>
 					</th>
 					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}}">Price</a>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+							Employee Last Name</a>
+					</th>
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+							Employee Email</a>
 					</th>
 					<th> Actions </th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="stock : ${listStocks}">
-					<td th:text="${stock.symbol}"></td>
-					<td th:text="${stock.price}"></td>
-					<td><a th:href="@{/trade/}" class="btn btn-primary">Trade</a>
-					<!-- <td><a th:href="@{/trade/{id}(id=${stock.id})}" class="btn btn-primary">Trade</a> -->
+				<tr th:each="employee : ${listEmployees}">
+					<td th:text="${employee.firstName}"></td>
+					<td th:text="${employee.lastName}"></td>
+					<td th:text="${employee.email}"></td>
+					<td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
+					    <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
 					</td>
 				</tr>
 			</tbody>
