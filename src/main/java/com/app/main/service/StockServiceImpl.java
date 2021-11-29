@@ -44,43 +44,44 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public Stock getStockById(long id) {
 		Optional<Stock> optional = stockRepository.findById(id);
-		Stock employee = null;
+		Stock stock = null;
 		if (optional.isPresent()) {
-			employee = optional.get();
+			stock = optional.get();
 		} else {
-			throw new RuntimeException(" Employee not found for id :: " + id);
+			throw new RuntimeException(" Stock not found for id :: " + id);
 		}
-		return employee;
+		return stock;
 	}
 
 	@Override
 	public Page<Stock> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
 
-		// String[] stocks = {"TSLA", "GOOGL", "BTC", "AAPL", "FB", "AMZN", "MSFT", "NIO", "NVDA", "MRNA"};
+		// String[] stocks = {"TSLA", "GOOGL", "BTC", "AAPL", "FB", "AMZN", "MSFT",
+		// "NIO", "NVDA", "MRNA"};
 
 		// for(int i = 0; i < stocks.length; i++) {
-		// 	try {
-		// 		HttpRequest request = HttpRequest.newBuilder()
-		// 		.uri(URI.create("https://yfapi.net/v8/finance/chart/" + stocks[i] + "/"))
-		// 		.header("x-api-key", "ZRq5PxxiQK5XPX3U12e3F3b8i6RSmQlA4c49PqTk")
-		// 		.method("GET", HttpRequest.BodyPublishers.noBody())
-		// 		.build();
-		// 		HttpResponse<String> response = HttpClient.newHttpClient()
-		// 		.send(request, HttpResponse.BodyHandlers.ofString());
-	
-		// 		JSONObject jsonObject = new JSONObject(response.body());
-		// 		System.out.println(jsonObject);
-		// 		JSONObject object = jsonObject.getJSONObject("chart");
-		// 		JSONArray object2 = object.getJSONArray("result");
-		// 		JSONObject object3 = object2.getJSONObject(0).getJSONObject("meta");
-		// 		Double price = object3.getDouble("regularMarketPrice");
-	
-		// 		Stock stock = new Stock(stocks[i],price.toString());
-		// 		enterStock(stock);
-	
-		// 	} catch (Exception e) {
-		// 		System.out.println(e.toString());
-		// 	}
+		// try {
+		// HttpRequest request = HttpRequest.newBuilder()
+		// .uri(URI.create("https://yfapi.net/v8/finance/chart/" + stocks[i] + "/"))
+		// .header("x-api-key", "ZRq5PxxiQK5XPX3U12e3F3b8i6RSmQlA4c49PqTk")
+		// .method("GET", HttpRequest.BodyPublishers.noBody())
+		// .build();
+		// HttpResponse<String> response = HttpClient.newHttpClient()
+		// .send(request, HttpResponse.BodyHandlers.ofString());
+
+		// JSONObject jsonObject = new JSONObject(response.body());
+		// System.out.println(jsonObject);
+		// JSONObject object = jsonObject.getJSONObject("chart");
+		// JSONArray object2 = object.getJSONArray("result");
+		// JSONObject object3 = object2.getJSONObject(0).getJSONObject("meta");
+		// Double price = object3.getDouble("regularMarketPrice");
+
+		// Stock stock = new Stock(stocks[i],price.toString());
+		// enterStock(stock);
+
+		// } catch (Exception e) {
+		// System.out.println(e.toString());
+		// }
 		// }
 
 		// Insert initial test data
@@ -105,35 +106,35 @@ public class StockServiceImpl implements StockService {
 		// Stock stock10 = new Stock("MRNA","282.69");
 		// enterStock(stock10);
 
-		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-		Sort.by(sortField).descending();
-		
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
+				: Sort.by(sortField).descending();
+
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 
 		// for(Stock x : this.stockRepository.findAll(pageable)) {
-		// 	try {
-		// 		HttpRequest request = HttpRequest.newBuilder()
-		// 		.uri(URI.create("https://yfapi.net/v8/finance/chart/" + stocks[i] + "/"))
-		// 		.header("x-api-key", "ZRq5PxxiQK5XPX3U12e3F3b8i6RSmQlA4c49PqTk")
-		// 		.method("GET", HttpRequest.BodyPublishers.noBody())
-		// 		.build();
-		// 		HttpResponse<String> response = HttpClient.newHttpClient()
-		// 		.send(request, HttpResponse.BodyHandlers.ofString());
-	
-		// 		JSONObject jsonObject = new JSONObject(response.body());
-		// 		JSONObject object = jsonObject.getJSONObject("chart");
-		// 		JSONArray object2 = object.getJSONArray("result");
-		// 		JSONObject object3 = object2.getJSONObject(0).getJSONObject("meta");
-		// 		Double price = object3.getDouble("regularMarketPrice");
-	
-		// 		Stock stock = new Stock(stocks[i],price.toString());
-		// 		// stock.setSymbol();
-		// 		// stock.setPrice();
-		// 		enterStock(stock);
-	
-		// 	} catch (Exception e) {
-		// 		System.out.println(e.toString());
-		// 	}
+		// try {
+		// HttpRequest request = HttpRequest.newBuilder()
+		// .uri(URI.create("https://yfapi.net/v8/finance/chart/" + stocks[i] + "/"))
+		// .header("x-api-key", "ZRq5PxxiQK5XPX3U12e3F3b8i6RSmQlA4c49PqTk")
+		// .method("GET", HttpRequest.BodyPublishers.noBody())
+		// .build();
+		// HttpResponse<String> response = HttpClient.newHttpClient()
+		// .send(request, HttpResponse.BodyHandlers.ofString());
+
+		// JSONObject jsonObject = new JSONObject(response.body());
+		// JSONObject object = jsonObject.getJSONObject("chart");
+		// JSONArray object2 = object.getJSONArray("result");
+		// JSONObject object3 = object2.getJSONObject(0).getJSONObject("meta");
+		// Double price = object3.getDouble("regularMarketPrice");
+
+		// Stock stock = new Stock(stocks[i],price.toString());
+		// // stock.setSymbol();
+		// // stock.setPrice();
+		// enterStock(stock);
+
+		// } catch (Exception e) {
+		// System.out.println(e.toString());
+		// }
 		// }
 
 		return this.stockRepository.findAll(pageable);

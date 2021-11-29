@@ -6,6 +6,25 @@
 </head>
 <body>
     <h1>Portfolio Page</h1> 
-    <p th:text="'Hello, ' + ${name} + '!'" />
+    <table>
+        <thead>
+            <tr>
+                <th>Ticker</th>
+                <!--<th>Current Price</th>
+                <th>Profit/loss</th>-->   
+                <th>Amount Owned</th>
+                <th>Price Paid</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="position : ${positions}">
+                <td th:text="${position.getTicker()}"></td>
+                <td th:text="${position.getAmount()}"></td>
+                <td th:text="${position.getInitialPrice()}"></td>
+            </tr>
+
+        </tbody>
+    </table>
 </body>
 </html>

@@ -24,9 +24,9 @@ public class TradeController {
 	@Autowired
 	private TradeService tradeService;
 	private StockService stockService;
-	
-	@GetMapping("/trade/")//{id}")
-	public String trade(Model model){//(@PathVariable ( value = "id") long id, Model model) {
+
+	@GetMapping("/trade") // {id}")
+	public String trade(Model model) {// (@PathVariable ( value = "id") long id, Model model) {
 		// create model attribute to bind form data
 		// Stock stock = stockService.getStockById(id);
 		Trade trade = new Trade();
@@ -34,7 +34,7 @@ public class TradeController {
 		model.addAttribute("trade", trade);
 		return "trade";
 	}
-	
+
 	@PostMapping("/enterTrade")
 	public String enterTrade(@ModelAttribute("trade") Trade trade) {
 		// enter trade to database
