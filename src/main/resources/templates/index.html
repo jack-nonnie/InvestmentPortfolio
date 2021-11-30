@@ -27,17 +27,34 @@
 		</form>
 		<table class = "table table-striped table-responsive-md">
 			<thead>
-				<tr>
-					<th>Stock Description</th>
-					<th>Symbol</th>
-					<th>Type of Stock</th>
+				<tr >
+					<th>Stock Ticker</th>
+					<th>52 Week Low</th>
+					<th>52 Week High</th>
+					<th>Beta</th>
+					<th>Book Value Per Share</th>
+					<th>Dividends Per Share</th>
+					<th>Earnings Per Share Normalized</th>
+					<th>Market Cap</th>
+					<th>Price to Earnings Normalized</th>
+					<th>ROI Annual</th>
+					<th>Debt to Equity</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="result : ${results}">
-					<td th:text="${result.get('description')}"></td>
-					<td th:text="${result.get('symbol')}"></td>
-					<td th:text="${result.get('type')}"></td>
+					<td th:text="${result.get('ticker')}"></td>
+					<td th:text="${result.get('52WeekLow')}"></td>
+					<td th:text="${result.get('52WeekHigh')}"></td>
+					<td th:text="${result.get('beta')}"></td>
+					<td th:text="${result.get('bookValuePerShareAnnual')}"></td>
+					<td th:text="${result.get('dividendPerShareAnnual')}"></td>
+					<td th:text="${result.get('epsNormalizedAnnual')}"></td>
+					<td th:text="${result.get('marketCapitalization')}"></td>
+					<td th:text="${result.get('peNormalizedAnnual')}"></td>
+					<td th:text="${result.get('roiAnnual')}"></td>
+					<td th:text="${result.get('totalDebt/totalEquityAnnual')}"></td>
+					
 				</tr>
 			</tbody>
 		</table>

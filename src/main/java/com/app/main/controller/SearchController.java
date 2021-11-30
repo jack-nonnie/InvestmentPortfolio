@@ -21,15 +21,20 @@ public class SearchController {
     public String viewHome(Model model){
         Search search = new Search();
         model.addAttribute("search", search);
-        model.addAttribute("reults", new ArrayList<Map>());
+        model.addAttribute("results", new ArrayList<Map>());
         return "index";
     }
     @PostMapping("/search")
     public String search(Model model, @ModelAttribute("search") Search search){
         System.out.println("HELLLLLL");
-        ArrayList<Map> result = searchService.searchStock(search);
-        System.out.println(result);
-        model.addAttribute("results", result);
+        Map<String,Object> result = searchService.searchStock(search);
+        result.put("ticker", search.getStr());
+        ArrayList<Map> r = (ArrayList<Map>) model.getAttribute("results");
+        if(r == null){
+            r = new ArrayList<Map>();
+        }
+        r.add(result);
+        model.addAttribute("results", r);
         return "index";
     }
 }

@@ -3,6 +3,7 @@ package com.app.main.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.app.main.model.Search;
@@ -13,19 +14,18 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class SearchServiceImpl implements SearchService{
     @Override
-    public ArrayList<Map> searchStock(Search search){
+    public Map<String, Object> searchStock(Search search){
         
         final String apiKey = System.getProperty("apiKey");
-        String str = "https://finnhub.io/api/v1/search?q=" + search.getStr() + "&token=" + apiKey;
+        String str2 = "https://finnhub.io/api/v1/stock/metric?symbol=" + search.getStr() + "&metric=all&token=" + apiKey;
         try { 
-            URI uri = new URI(str);
-            RestTemplate restTemplate = new RestTemplate();
-            Map<String, ArrayList<Map>> s = restTemplate.getForObject(uri, Map.class);
-            
-            return s.get("result");
+            URI uri = new URI(str2);
+            RestTemplate r = new RestTemplate();
+            Map<String, Map<String, Object>> a = r.getForObject(uri, Map.class);
+            return a.get("metric");
         } catch (URISyntaxException e) {
             // TODO Auto-generated catch block
-            return new ArrayList<Map>();
+            return new HashMap<String, Object>();
         }
     }
 }
