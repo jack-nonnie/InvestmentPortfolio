@@ -13,11 +13,35 @@
 <body>
 
 	<div class="container my-2">
-	<h1>Stock List</h1>
+	<h1>Stock Search</h1>
 	
-	<a th:href = "@{/trade}" class="btn btn-primary btn-sm mb-3"> Portfolio </a>
-	
-		<table border="1" class = "table table-striped table-responsive-md">
+	<a th:href = "@{/portfolio}" class="btn btn-primary btn-sm mb-3"> Portfolio </a>
+
+	<a th:href = "@{/trade}" class="btn btn-primary btn-sm mb-3"> Trade </a>
+		<form action="#" th:action="@{/search}" th:object="${search}"
+		method="POST">
+			<input type="text" th:field="*{str}"
+				placeholder="Stock Search" class="form-control mb-4 col-4">
+			<button type="submit" class="btn btn-info col-2"> Search</button>
+
+		</form>
+		<table class = "table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>Stock Description</th>
+					<th>Symbol</th>
+					<th>Type of Stock</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="result : ${results}">
+					<td th:text="${result.get('description')}"></td>
+					<td th:text="${result.get('symbol')}"></td>
+					<td th:text="${result.get('type')}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<!--<table border="1" class = "table table-striped table-responsive-md">
 			<thead>
 				<tr>
 					<th>
@@ -35,7 +59,7 @@
 					<td th:text="${stock.symbol}"></td>
 					<td th:text="${stock.price}"></td>
 					<td><a th:href="@{/trade/}" class="btn btn-primary">Trade</a>
-					<!-- <td><a th:href="@{/trade/{id}(id=${stock.id})}" class="btn btn-primary">Trade</a> -->
+					 <td><a th:href="@{/trade/{id}(id=${stock.id})}" class="btn btn-primary">Trade</a> 
 					</td>
 				</tr>
 			</tbody>
@@ -62,7 +86,7 @@
 					<span th:unless="${currentPage < totalPages}">Last</span>
    				 </div>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </body>
 </html>

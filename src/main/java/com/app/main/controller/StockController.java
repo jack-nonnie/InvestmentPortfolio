@@ -17,7 +17,7 @@ import com.app.main.service.StockService;
 
 @Controller
 public class StockController {
-
+/*
 	@Autowired
 	private StockService stockService;
 
@@ -47,5 +47,5 @@ public class StockController {
 
 		model.addAttribute("listStocks", listStocks);
 		return "index";
-	}
+	}*/
 }

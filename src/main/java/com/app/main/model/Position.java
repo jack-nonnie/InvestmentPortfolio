@@ -72,7 +72,7 @@ public class Position {
         //System.setProperty("apiKey", "c67b6uaad3iai8rarkgg");
         final String apiKey = System.getProperty("apiKey");
         String str = "https://finnhub.io/api/v1/quote?symbol=" + this.ticker + "&token=" + apiKey;
-        try {
+        try { 
             URI uri = new URI(str);
             RestTemplate restTemplate = new RestTemplate();
             Map s = restTemplate.getForObject(uri, Map.class);

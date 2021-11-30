@@ -24,10 +24,10 @@
         <tbody>
             <tr th:each="position : ${positions}">
                 <td th:text="${position.getTicker()}"></td>
-                <td th:text="${position.getCurrentPrice()}"></td>
+                <td th:text="${#numbers.formatCurrency(position.getCurrentPrice())}"></td>
                 <td th:text="${position.getAmount()}"></td>
-                <td th:text="${position.getValuation()}"></td>
-                <td th:text="${position.getInitialPrice()}"></td>
+                <td th:text="${#numbers.formatCurrency(position.getValuation())}"></td>
+                <td th:text="${#numbers.formatCurrency(position.getInitialPrice())}"></td>
                 <td th:text="${position.getProfitLoss()}"></td>
             </tr>
 
