@@ -7,5 +7,5 @@ import com.app.main.model.Trade;
 
 @Repository
 public interface TradeRepository extends JpaRepository<Trade, Long>{
-
+ 
 }

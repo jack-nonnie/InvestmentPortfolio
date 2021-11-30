@@ -10,16 +10,16 @@
         <thead>
             <tr>
                 <th>Ticker</th>
-                <!--<th>Current Price</th>
-                <th>Profit/loss</th>-->   
+                <th>Current Price</th>
+                <!--<th>Profit/loss</th>-->   
                 <th>Amount Owned</th>
-                <th>Price Paid</th>
-                
+                <th>Price Paid</th>    
             </tr>
-        </thead>
+        </thead> 
         <tbody>
             <tr th:each="position : ${positions}">
                 <td th:text="${position.getTicker()}"></td>
+                <td th:text="${position.getCurrentPrice()}"></td>
                 <td th:text="${position.getAmount()}"></td>
                 <td th:text="${position.getInitialPrice()}"></td>
             </tr>

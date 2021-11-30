@@ -17,4 +17,4 @@ public interface TradeService {
 	// Page<Trade> findPaginated(int pageNo, int pageSize, String sortField, String
 	// sortDirection);
 	List<Position> getAllPositions();
-}
+} 

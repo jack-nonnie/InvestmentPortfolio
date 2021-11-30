@@ -16,7 +16,7 @@ public class Trade {
 	private long id;
 	
 	@Column(name = "symbol")
-	private String symbol;
+	private String symbol; 
 	
 	@Column(name = "price")
 	private String price;

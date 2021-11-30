@@ -9,24 +9,24 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "stocks")
-public class Stock {
+public class Stocks {
 
     // public Stock() {}
 
     // public Stock(String symbol, String price) {
-    //     this.symbol = symbol;
-    //     this.price = price;
+    // this.symbol = symbol;
+    // this.price = price;
     // }
-	
-	@Id
-	@GeneratedValue(strategy =  GenerationType.IDENTITY)
-	private long id;
-	
-	@Column(name = "symbol")
-	private String symbol;
-	
-	@Column(name = "price")
-	private String price;
+
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "symbol")
+    private String symbol;
+
+    @Column(name = "price")
+    private String price;
 
     public long getId() {
         return this.id;

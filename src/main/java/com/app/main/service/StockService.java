@@ -4,12 +4,16 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.app.main.model.Stock;
+import com.app.main.model.Stocks;
 
 public interface StockService {
-	List<Stock> getAllStocks();
-	void enterStock(Stock stock);
-	Stock getStockById(long id);
+	List<Stocks> getAllStocks();
+
+	void enterStock(Stocks stock);
+
+	Stocks getStockById(long id);
+
 	// void deleteStockById(long id);
-	Page<Stock> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+	Page<Stocks> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }
+ 

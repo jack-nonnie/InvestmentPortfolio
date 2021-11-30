@@ -3,17 +3,17 @@ package com.app.main.model;
 import java.util.ArrayList;
 
 public class Portfolio {
-    private ArrayList<Stock_old> stocks;
+    private ArrayList<Stock_api> stocks;
     private ArrayList<Float> positions;
     private ArrayList<Float> originalPrices;
 
     public Portfolio() {
-        this.stocks = new ArrayList<Stock_old>();
+        this.stocks = new ArrayList<Stock_api>();
         this.positions = new ArrayList<Float>();
         this.originalPrices = new ArrayList<Float>();
     }
 
-    public Portfolio(ArrayList<Stock_old> stocks, ArrayList<Float> positions, ArrayList<Float> originalPrices) {
+    public Portfolio(ArrayList<Stock_api> stocks, ArrayList<Float> positions, ArrayList<Float> originalPrices) {
         this.stocks = stocks;
         this.positions = positions;
         this.originalPrices = originalPrices;
@@ -22,7 +22,7 @@ public class Portfolio {
     public float getTotalValueOfStocks() {
         float tot = 0;
         for (int i = 0; i < stocks.size(); i++) {
-            tot += this.positions.get(i) * this.stocks.get(i).getCurrentPrice();
+            //tot += this.positions.get(i) * this.stocks.get(i).getC();
         }
         return tot;
     }
@@ -41,7 +41,8 @@ public class Portfolio {
         if (index >= this.stocks.size() || index < 0) {
             return -1;
         }
-        return this.positions.get(index) * this.stocks.get(index).getCurrentPrice();
+        return (float) 0;
+        //return this.positions.get(index) * Float.this.stocks.get(index).getC();
     }
 
     public float getOriginalPriceByIndex(int index) {
@@ -58,18 +59,18 @@ public class Portfolio {
         return this.positions.get(index);
     }
 
-    public Stock_old getStockByIndex(int index) {
+    public Stock_api getStockByIndex(int index) {
         if (index >= this.stocks.size() || index < 0) {
             return null;
         }
         return this.stocks.get(index);
     }
 
-    public void updateStocks(ArrayList<Stock_old> stocks) {
+    public void updateStocks(ArrayList<Stock_api> stocks) {
         this.stocks = stocks;
     }
 
-    public void sellPosition(Stock_old stock, float position, float originalPrice) {
+    public void sellPosition(Stock_api stock, float position, float originalPrice) {
         // need to implement the conversion to cash
         for (int i = 0; i < stocks.size(); i++) {
             if (this.stocks.get(i) == stock) {
@@ -84,12 +85,13 @@ public class Portfolio {
                     this.positions.set(i, this.positions.get(i) - position);
                     this.originalPrices.set(i, this.originalPrices.get(i) - originalPrice);
                 }
-                break;
+                break; 
             }
         }
     }
+    //{c=160.24, d=3.43, dp=2.1874, h=161.19, l=158.7901, o=159.37, pc=156.81, t=1638219604}
 
-    public void addPosition(Stock_old stock, float position, float originalPrice) {
+    public void addPosition(Stock_api stock, float position, float originalPrice) {
         boolean added = false;
         for (int i = 0; i < stocks.size(); i++) {
             if (this.stocks.get(i) == stock) {

@@ -1,5 +1,6 @@
 package com.app.main.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import yahoofinance.YahooFinance;
 
 import com.app.main.model.Trade;
 import com.app.main.model.Position;
@@ -41,7 +44,7 @@ public class TradeServiceImpl implements TradeService {
 				if (trades.get(i).getSymbol().equals(positions.get(j).getTicker())) {
 					index = j;
 					break;
-				}
+				} 
 			}
 			if (index == -1) {
 				Position p = new Position(trades.get(i).getSymbol(), trades.get(i).getAmount(),

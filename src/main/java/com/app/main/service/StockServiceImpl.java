@@ -1,10 +1,8 @@
 package com.app.main.service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +20,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.app.main.model.Stock;
+import com.app.main.model.Stocks;
 import com.app.main.repository.StockRepository;
 
 @Service
@@ -32,19 +30,19 @@ public class StockServiceImpl implements StockService {
 	private StockRepository stockRepository;
 
 	@Override
-	public List<Stock> getAllStocks() {
+	public List<Stocks> getAllStocks() {
 		return stockRepository.findAll();
 	}
 
 	@Override
-	public void enterStock(Stock stock) {
+	public void enterStock(Stocks stock) {
 		this.stockRepository.save(stock);
 	}
 
 	@Override
-	public Stock getStockById(long id) {
-		Optional<Stock> optional = stockRepository.findById(id);
-		Stock stock = null;
+	public Stocks getStockById(long id) {
+		Optional<Stocks> optional = stockRepository.findById(id);
+		Stocks stock = null;
 		if (optional.isPresent()) {
 			stock = optional.get();
 		} else {
@@ -54,7 +52,7 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public Page<Stock> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+	public Page<Stocks> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
 
 		// String[] stocks = {"TSLA", "GOOGL", "BTC", "AAPL", "FB", "AMZN", "MSFT",
 		// "NIO", "NVDA", "MRNA"};
@@ -138,5 +136,5 @@ public class StockServiceImpl implements StockService {
 		// }
 
 		return this.stockRepository.findAll(pageable);
-	}
+	} 
 }

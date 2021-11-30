@@ -3,7 +3,7 @@ package com.app.main.controller;
 import java.util.List;
 
 import com.app.main.model.Position;
-import com.app.main.model.Stock;
+import com.app.main.model.Stocks;
 import com.app.main.model.Trade;
 import com.app.main.repository.TradeRepository;
 import com.app.main.service.TradeService;
@@ -19,7 +19,7 @@ public class PortfolioController {
 	@Autowired
 	private TradeService tradeService;
 
-	@GetMapping("/portfolio")
+	@GetMapping("/portfolio") 
 	public String portfolio(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
 			Model model) {
 		model.addAttribute("name", name);

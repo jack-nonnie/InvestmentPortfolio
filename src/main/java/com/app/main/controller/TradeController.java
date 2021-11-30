@@ -1,5 +1,6 @@
 package com.app.main.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.app.main.model.Stock;
+import com.app.main.model.Stocks;
 
 import com.app.main.model.Trade;
 import com.app.main.service.StockService;
@@ -25,7 +26,7 @@ public class TradeController {
 	private TradeService tradeService;
 	private StockService stockService;
 
-	@GetMapping("/trade") // {id}")
+	@GetMapping("/trade")  // {id}")
 	public String trade(Model model) {// (@PathVariable ( value = "id") long id, Model model) {
 		// create model attribute to bind form data
 		// Stock stock = stockService.getStockById(id);
