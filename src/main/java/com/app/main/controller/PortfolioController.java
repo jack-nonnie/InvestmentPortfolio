@@ -3,9 +3,6 @@ package com.app.main.controller;
 import java.util.List;
 
 import com.app.main.model.Position;
-import com.app.main.model.Stocks;
-import com.app.main.model.Trade;
-import com.app.main.repository.TradeRepository;
 import com.app.main.service.TradeService;
 
 import org.springframework.beans.factory.annotation.Autowired;

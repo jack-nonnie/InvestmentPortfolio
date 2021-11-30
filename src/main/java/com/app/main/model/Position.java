@@ -82,19 +82,7 @@ public class Position {
             return "0";
         }
         
-        /*try {
-            HttpResponse<String> response = client.send(request, handler);
-            System.out.println("HEREEEEEEEEE");
-            System.out.println(response.body());
-            ObjectMapper mapper = new ObjectMapper();
-            return "B";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "A";
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return "A";
-        }*/
+        
 
     }
 
