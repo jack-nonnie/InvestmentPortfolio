@@ -15,6 +15,8 @@ public class Position {
 
     private String initialPrice;
 
+    private String currentPrice;
+
     public Position() {
 
     }
@@ -23,6 +25,7 @@ public class Position {
         this.ticker = ticker;
         this.amount = amount;
         this.initialPrice = initialPrice;
+        this.currentPrice = this.setCurrentPrice();
     }
 
     public String getTicker() {
@@ -44,6 +47,9 @@ public class Position {
     public String getInitialPrice() {
         return this.initialPrice;
     }
+    public String getCurrentPrice(){
+        return this.currentPrice;
+    }
 
     public void setInitialPrice(String initialPrice) {
         this.initialPrice = initialPrice;
@@ -55,8 +61,15 @@ public class Position {
         double p = Double.parseDouble(price) + Double.parseDouble(this.initialPrice);
         this.initialPrice = String.valueOf(p);
     }
-
-    public String getCurrentPrice() {
+    public String getValuation(){
+        return String.valueOf(Double.parseDouble(this.currentPrice) * Double.parseDouble(this.amount));
+    }
+    public String getProfitLoss(){
+        String val = this.getValuation();
+        return String.valueOf(100 *(Double.parseDouble(val) - Double.parseDouble(this.initialPrice))/Double.parseDouble(this.initialPrice)) + "%";
+    }
+    public String setCurrentPrice() {
+        //System.setProperty("apiKey", "c67b6uaad3iai8rarkgg");
         final String apiKey = System.getProperty("apiKey");
         String str = "https://finnhub.io/api/v1/quote?symbol=" + this.ticker + "&token=" + apiKey;
         try {
