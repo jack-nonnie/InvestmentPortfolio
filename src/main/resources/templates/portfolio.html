@@ -30,6 +30,15 @@
                 <td th:text="${#numbers.formatCurrency(position.getInitialPrice())}"></td>
                 <td th:text="${position.getProfitLoss()}"></td>
             </tr>
+            <tr>
+                <td><b>Total</b></td>
+                <td><b>N/A</b></td>
+                <td><b>N/A</b></td>
+                <td> <b th:text="${#numbers.formatCurrency(totalValuation)}"></b></td>
+                <td><b th:text="${#numbers.formatCurrency(totalInitialPrice)}"></b></td>
+                <td><b th:text="${totalProfitLoss}"></b></td>
+                
+            </tr>
 
         </tbody>
     </table>

@@ -66,7 +66,7 @@ public class Position {
     }
     public String getProfitLoss(){
         String val = this.getValuation();
-        return String.valueOf(100 *(Double.parseDouble(val) - Double.parseDouble(this.initialPrice))/Double.parseDouble(this.initialPrice)) + "%";
+        return String.format("%.2f",100 *(Double.parseDouble(val) - Double.parseDouble(this.initialPrice))/Double.parseDouble(this.initialPrice)) + "%";
     }
     public String setCurrentPrice() {
         //System.setProperty("apiKey", "c67b6uaad3iai8rarkgg");

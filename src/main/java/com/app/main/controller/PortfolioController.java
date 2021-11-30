@@ -22,7 +22,12 @@ public class PortfolioController {
 		model.addAttribute("name", name);
 		List<Position> positions = tradeService.getAllPositions();
 		model.addAttribute("positions", positions);
-
+		String totalInitialPrice = tradeService.getInitialPositionTotalValue(positions);
+		String totalValuation = tradeService.getTotalPositionValue(positions);
+		model.addAttribute("totalInitialPrice", totalInitialPrice);
+		model.addAttribute("totalValuation", totalValuation);
+		String totalProfitLoss = tradeService.getTotalProfitLoss(totalInitialPrice,totalValuation);
+		model.addAttribute("totalProfitLoss", totalProfitLoss);
 		return "portfolio";
 	}
 
