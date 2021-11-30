@@ -3,6 +3,13 @@ Things accomplished:
 1. Set up Spring framework
 2. Set up class for Stocks and Portfolio
 3. Set up a Servelt for the portfolio page and for the stock search page
+4. Set up the api so that we are able to get live prices for stocks
+5. Set up the api so that we can find various information about stocks
+6. Created a search function to search for information about stocks
+7. Redesigned the Portfolio
+8. Made the trading stocks page work better behind the scenes
+9. Set up class for positions
+10. Desmelled/refractored a lot of the code
 
 Investment Portfolio Simulator
 
