@@ -69,7 +69,7 @@ public class Position {
         return String.format("%.2f",100 *(Double.parseDouble(val) - Double.parseDouble(this.initialPrice))/Double.parseDouble(this.initialPrice)) + "%";
     }
     public String setCurrentPrice() {
-        //System.setProperty("apiKey", "c67b6uaad3iai8rarkgg");
+        //System.setProperty("apiKey", );
         final String apiKey = System.getProperty("apiKey");
         String str = "https://finnhub.io/api/v1/quote?symbol=" + this.ticker + "&token=" + apiKey;
         try { 

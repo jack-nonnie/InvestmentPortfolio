@@ -10,6 +10,7 @@
 </head>
 <body>
     <h1>Portfolio Page</h1> 
+    <h3>Stocks</h3>
     <table class = "table table-striped table-responsive-md">
         <thead>
             <tr>
@@ -42,5 +43,18 @@
 
         </tbody>
     </table>
+    <div class ="container">
+        <h3>Cash Available</h3>
+        <p><b th:text="${#numbers.formatCurrency(cashBalance)}"></b></p>
+        <form action="#" th:action="@{/deposit}" th:object="${cash}"
+			method="POST">
+            <input type="text" th:field="*{amount}"
+				placeholder="Amount to Deposit" class="form-control mb-4 col-4">
+            <button type="submit" class="btn btn-info col-2"> Deposit</button>
+        </form>
+    </div>
+    <hr>
+		
+		<a th:href = "@{/}"> Back to Stock List</a>
 </body>
 </html>
