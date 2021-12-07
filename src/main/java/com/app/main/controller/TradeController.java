@@ -30,17 +30,15 @@ public class TradeController {
 		model.addAttribute("trade", trade);
 		return "trade";
 	}
-	@GetMapping("/error")
-	public String error(Model model){
-		return "error";
-	}
 
 	@PostMapping("/enterTrade")
-	public String enterTrade(@ModelAttribute("trade") Trade trade) {
+	public String enterTrade(Model model, @ModelAttribute("trade") Trade trade ) {
 		// enter trade to database
+		trade.setSymbol(trade.getSymbol().toUpperCase());
 		double cashBalance = cashService.getBalance();
 		if(Double.parseDouble(trade.getCash()) > cashBalance){
-			return "redirect:/error";
+			model.addAttribute("errorMessage", "There is not enough cash in your balance to complete the trade. Please deposit more into the account or reduce the amount trying to be purchased.");
+			return "error";
 		}
 		Cash withdrawl = new Cash();
 		withdrawl.setAmount(-1 * Double.parseDouble(trade.getCash()));

@@ -26,13 +26,18 @@ public class SearchController {
     }
     @PostMapping("/search")
     public String search(Model model, @ModelAttribute("search") Search search){
-        System.out.println("HELLLLLL");
         Map<String,Object> result = searchService.searchStock(search);
+        System.out.println(result);
+        if(result.size() <= 1){
+            model.addAttribute("errorMessage", "The ticker you searched for cannot be found. Please try a different ticker.");
+            return "error";
+        }
         result.put("ticker", search.getStr());
         ArrayList<Map> r = (ArrayList<Map>) model.getAttribute("results");
         if(r == null){
             r = new ArrayList<Map>();
         }
+        
         r.add(result);
         model.addAttribute("results", r);
         return "index";

@@ -29,6 +29,7 @@
 			<thead>
 				<tr >
 					<th>Stock Ticker</th>
+					<th>Current Price</th>
 					<th>52 Week Low</th>
 					<th>52 Week High</th>
 					<th>Beta</th>
@@ -44,6 +45,7 @@
 			<tbody>
 				<tr th:each="result : ${results}">
 					<td th:text="${result.get('ticker')}"></td>
+					<td th:text="${result.get('currentPrice')}"></td>
 					<td th:text="${result.get('52WeekLow')}"></td>
 					<td th:text="${result.get('52WeekHigh')}"></td>
 					<td th:text="${result.get('beta')}"></td>

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>Error</h1>
-    <p>There is not enough cash in your balance to complete the trade. Please deposit more into the account or reduce the amount trying to be purchased.</p>
+    <p th:text="${errorMessage}"></p>
     <a th:href = "@{/}"> Back to Stock List</a>
 </body>
 </html>
