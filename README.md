@@ -10,6 +10,9 @@ Things accomplished:
 8. Made the trading stocks page work better behind the scenes
 9. Set up class for positions
 10. Desmelled/refractored a lot of the code
+11. Debugged and tested possible error end cases
+12. Created an error page that dynamically updates based off of different types of errors
+13. Added a second API call on the search so that one can get the current price of a stock
 
 Investment Portfolio Simulator
 
