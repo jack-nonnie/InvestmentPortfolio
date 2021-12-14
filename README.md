@@ -1,3 +1,10 @@
+Running Instructions:
+
+- Create a schema named "demo" running on a local MySQL database.
+- Update the credentials application.properties to your local credentials (defaults to root, root)
+- Add FinnHub API key to applications.properties
+- Run project with "mvn spring-boot:run"
+
 # InvestmentPortfolio
 Things accomplished:
 1. Set up Spring framework

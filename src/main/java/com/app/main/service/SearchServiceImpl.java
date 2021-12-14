@@ -9,14 +9,17 @@ import com.app.main.model.Search;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 public class SearchServiceImpl implements SearchService{
+
+    @Value("${apiKey}")
+    private String apiKey;
+    
     @Override
     public Map<String, Object> searchStock(Search search){
-        //System.setProperty("apiKey", );
-        final String apiKey = System.getProperty("apiKey");
-
+        
         String str = "https://finnhub.io/api/v1/quote?symbol=" + search.getStr().toUpperCase() + "&token=" + apiKey;
         String str2 = "https://finnhub.io/api/v1/stock/metric?symbol=" + search.getStr() + "&metric=all&token=" + apiKey;
         try { 
