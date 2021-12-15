@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Investment Portfolio</title>
+	<meta charset="ISO-8859-1">
+	<title>Investment Portfolio</title>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-	
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+		crossorigin="anonymous">
+	<script>
+		function toggleButton() {
+			document.getElementById('button').disabled = (document.getElementById('search').value === "");
+		}
+	</script>
 </head>
 <body>
 
 	<div class="container my-2">
-	<h1>Stock Search</h1>
-	
-	<a th:href = "@{/portfolio}" class="btn btn-primary btn-sm mb-3"> Portfolio </a>
-
-	<a th:href = "@{/trade}" class="btn btn-primary btn-sm mb-3"> Trade </a>
-		<form action="#" th:action="@{/search}" th:object="${search}"
-		method="POST">
-			<input type="text" th:field="*{str}"
-				placeholder="Stock Search" class="form-control mb-4 col-4">
-			<button type="submit" class="btn btn-info col-2"> Search</button>
-
+		<h1>Stock Search</h1>
+		
+		<a th:href = "@{/portfolio}" class="btn btn-primary btn-sm mb-3"> Portfolio </a>
+		<form action="#" th:action="@{/search}" th:object="${search}" method="POST">
+			<input id="search" type="text" th:field="*{str}"
+				placeholder="Stock Search" class="form-control mb-4 col-4" onchange="toggleButton()">
+			<button id="button" type="submit" class="btn btn-info col-2" disabled> Search</button>
 		</form>
 		<table class = "table table-striped table-responsive-md">
 			<thead>
@@ -40,6 +40,7 @@
 					<th>Price to Earnings Normalized</th>
 					<th>ROI Annual</th>
 					<th>Debt to Equity</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,7 +57,7 @@
 					<td th:text="${result.get('peNormalizedAnnual')}"></td>
 					<td th:text="${result.get('roiAnnual')}"></td>
 					<td th:text="${result.get('totalDebt/totalEquityAnnual')}"></td>
-					
+					<td><a th:href = "@{/trade/{id}(id=${result.get('ticker')})}" class="btn btn-primary btn-sm mb-3"> Trade </a></td>
 				</tr>
 			</tbody>
 		</table>

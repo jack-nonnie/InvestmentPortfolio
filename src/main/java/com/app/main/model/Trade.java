@@ -27,6 +27,17 @@ public class Trade {
     @Column(name = "amount")
 	private String amount;
 
+    @Column(name = "type")
+	private String type;
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public long getId() {
         return this.id;
     }
