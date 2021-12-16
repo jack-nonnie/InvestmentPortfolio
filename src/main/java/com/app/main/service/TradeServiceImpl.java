@@ -45,11 +45,11 @@ public class TradeServiceImpl implements TradeService {
 			}
 			if (index == -1) {
 				Position p = new Position(trades.get(i).getSymbol(), trades.get(i).getAmount(),
-						trades.get(i).getPrice(), this.apiKey);
+						trades.get(i).getCash(), this.apiKey);
 				positions.add(p);
 			} else {
 				Position p = positions.get(index);
-				p.addTradeToPosition(trades.get(i).getAmount(), trades.get(i).getPrice());
+				p.addTradeToPosition(trades.get(i).getAmount(), trades.get(i).getCash());
 				positions.set(index, p);
 			}
 		}

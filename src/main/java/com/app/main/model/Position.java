@@ -81,9 +81,6 @@ public class Position {
             // TODO Auto-generated catch block
             return "0";
         }
-        
-        
-
     }
 
     @Override
