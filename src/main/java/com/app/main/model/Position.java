@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
 
 public class Position {
 
@@ -21,11 +22,11 @@ public class Position {
 
     }
 
-    public Position(String ticker, String amount, String initialPrice) {
+    public Position(String ticker, String amount, String initialPrice, String apiKey) {
         this.ticker = ticker;
         this.amount = amount;
         this.initialPrice = initialPrice;
-        this.currentPrice = this.setCurrentPrice();
+        this.currentPrice = this.setCurrentPrice(apiKey);
     }
 
     public String getTicker() {
@@ -68,9 +69,8 @@ public class Position {
         String val = this.getValuation();
         return String.format("%.2f",100 *(Double.parseDouble(val) - Double.parseDouble(this.initialPrice))/Double.parseDouble(this.initialPrice)) + "%";
     }
-    public String setCurrentPrice() {
-        //System.setProperty("apiKey", );
-        final String apiKey = System.getProperty("apiKey");
+    public String setCurrentPrice(String apiKey) {
+        
         String str = "https://finnhub.io/api/v1/quote?symbol=" + this.ticker + "&token=" + apiKey;
         try { 
             URI uri = new URI(str);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -13,6 +14,9 @@ import com.app.main.repository.TradeRepository;
 
 @Service
 public class TradeServiceImpl implements TradeService {
+
+	@Value("${apiKey}")
+    private String apiKey;
 
 	@Autowired
 	private TradeRepository tradeRepository;
@@ -41,7 +45,7 @@ public class TradeServiceImpl implements TradeService {
 			}
 			if (index == -1) {
 				Position p = new Position(trades.get(i).getSymbol(), trades.get(i).getAmount(),
-						trades.get(i).getPrice());
+						trades.get(i).getPrice(), this.apiKey);
 				positions.add(p);
 			} else {
 				Position p = positions.get(index);

@@ -25,6 +25,7 @@ public class PortfolioController {
 	@GetMapping("/portfolio") 
 	public String portfolio(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
 			Model model) {
+		System.out.println("HELLLO");
 		model.addAttribute("name", name);
 		List<Position> positions = tradeService.getAllPositions();
 		model.addAttribute("positions", positions);
