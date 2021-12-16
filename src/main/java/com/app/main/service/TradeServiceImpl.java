@@ -59,6 +59,7 @@ public class TradeServiceImpl implements TradeService {
 	public String getTotalPositionValue(List<Position> positions){
 		double tot = 0;
 		for(int i = 0; i < positions.size(); i++){
+			
 			tot += Double.parseDouble(positions.get(i).getValuation());
 		}
 		return String.valueOf(tot);
@@ -76,5 +77,15 @@ public class TradeServiceImpl implements TradeService {
 		double init = Double.parseDouble(totalInitialPrice);
 		double cur = Double.parseDouble(totalValuation);
 		return String.format("%.2f",100*(cur - init)/init) + "%";
+	}
+	@Override
+	public Position getPositionOfSell(Trade trade){
+		List<Position> allPositions = this.getAllPositions();
+		for(int i = 0; i < allPositions.size(); i++){
+			if(allPositions.get(i).getTicker().equals(trade.getSymbol())){
+				return allPositions.get(i);
+			}
+		}
+		return null;
 	}
 }

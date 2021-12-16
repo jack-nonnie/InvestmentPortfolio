@@ -14,4 +14,5 @@ public interface TradeService {
 	String getTotalPositionValue(List<Position> positions);
 	String getInitialPositionTotalValue(List<Position> positions);
 	String getTotalProfitLoss(String totalInitialPrice, String totalValuation);
+	Position getPositionOfSell(Trade trade);
 } 
