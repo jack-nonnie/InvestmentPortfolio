@@ -19,7 +19,8 @@
                 <th>Amount Owned</th>
                 <th>Current Valuation</th>
                 <th>Price Paid</th>
-                <th>Profit/loss</th>    
+                <th>Profit/loss</th>
+                <th></th>    
             </tr>
         </thead> 
         <tbody>
@@ -30,6 +31,7 @@
                 <td th:text="${#numbers.formatCurrency(position.getValuation())}"></td>
                 <td th:text="${#numbers.formatCurrency(position.getInitialPrice())}"></td>
                 <td th:text="${position.getProfitLoss()}"></td>
+                <td><a th:href = "@{/trade/{id}(id=${position.getTicker()})}" class="btn btn-primary btn-sm mb-3"> Trade </a></td>
             </tr>
             <tr>
                 <td><b>Total</b></td>
@@ -38,6 +40,7 @@
                 <td> <b th:text="${#numbers.formatCurrency(totalValuation)}"></b></td>
                 <td><b th:text="${#numbers.formatCurrency(totalInitialPrice)}"></b></td>
                 <td><b th:text="${totalProfitLoss}"></b></td>
+                <td> </td>
                 
             </tr>
 
