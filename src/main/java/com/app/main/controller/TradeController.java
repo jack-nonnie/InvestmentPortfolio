@@ -31,10 +31,8 @@ public class TradeController {
 	@GetMapping("/trade/{id}")  // {id}")
 	public String trade(@PathVariable ( value = "id") String id, Model model) {
 		// create model attribute to bind form data
-		// Stock stock = stockService.getStockById(id);
 		Search search = new Search();
 		search.setStr(id);
-		// trade.setSymbol(stock.getSymbol());
 		Map<String, Object> stock = searchService.searchStock(search);
 		Trade trade = new Trade();
 		trade.setSymbol(id.toUpperCase());
@@ -45,17 +43,19 @@ public class TradeController {
 
 	@PostMapping("/enterTrade")
 	public String enterTrade(Model model, @ModelAttribute("trade") Trade trade) {
+		String errorMessage = "errorMessage";
+		String error = "error";
 		// enter trade to database
 		trade.setSymbol(trade.getSymbol().toUpperCase());
 		double cashBalance = cashService.getBalance();
 		if(trade.getType() == null){
-			model.addAttribute("errorMessage", "Please select either buy or sell before placing a trade.");
-			return "error";
+			model.addAttribute(errorMessage, "Please select either buy or sell before placing a trade.");
+			return error;
 		}
 		if(trade.getType().equals("BUY")){
 			if(Double.parseDouble(trade.getCash()) > cashBalance){
-				model.addAttribute("errorMessage", "There is not enough cash in your balance to complete the trade. Please deposit more into the account or reduce the amount trying to be purchased.");
-				return "error";
+				model.addAttribute(errorMessage, "There is not enough cash in your balance to complete the trade. Please deposit more into the account or reduce the amount trying to be purchased.");
+				return error;
 			}
 			Cash withdrawl = new Cash();
 			withdrawl.setAmount(-1 * Double.parseDouble(trade.getCash()));
@@ -66,12 +66,12 @@ public class TradeController {
 		else{
 			Position position = tradeService.getPositionOfSell(trade);
 			if(position == null){
-				model.addAttribute("errorMessage", "You do not own this stock.");
-				return "error";
+				model.addAttribute(errorMessage, "You do not own this stock.");
+				return error;
 			}
 			if(Double.parseDouble(position.getAmount()) < Double.parseDouble(trade.getAmount())){
-				model.addAttribute("errorMessage", "You tried to sell more of this stock than you currently own");
-				return "error";
+				model.addAttribute(errorMessage, "You tried to sell more of this stock than you currently own");
+				return error;
 			}
 			Cash deposit = new Cash();
 			deposit.setAmount(Double.parseDouble(trade.getCash()));

@@ -29,12 +29,17 @@ public class SearchServiceImpl implements SearchService{
             URI uri2 = new URI(str2);
             RestTemplate r = new RestTemplate();
             Map<String, Map<String, Object>> a = r.getForObject(uri2, Map.class);
+            if(a == null){
+                return new HashMap<>();
+            }
             Map<String, Object> map = a.get("metric");
+            if(priceMap == null){
+                return new HashMap<>();
+            }
             map.put("currentPrice", priceMap.get("c"));
             return map;
         } catch (URISyntaxException e) {
-            // TODO Auto-generated catch block
-            return new HashMap<String, Object>();
+            return new HashMap<>();
         }
     }
 }

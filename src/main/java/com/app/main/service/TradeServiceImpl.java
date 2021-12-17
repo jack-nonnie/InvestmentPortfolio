@@ -34,7 +34,7 @@ public class TradeServiceImpl implements TradeService {
 	@Override
 	public List<Position> getAllPositions() {
 		List<Trade> trades = tradeRepository.findAll();
-		List<Position> positions = new ArrayList<Position>();
+		List<Position> positions = new ArrayList<>();
 		for (int i = 0; i < trades.size(); i++) {
 			int index = -1;
 			for (int j = 0; j < positions.size(); j++) {

@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.springframework.web.client.RestTemplate;
-import org.springframework.beans.factory.annotation.Value;
 
 public class Position {
 
@@ -76,6 +75,12 @@ public class Position {
             URI uri = new URI(str);
             RestTemplate restTemplate = new RestTemplate();
             Map s = restTemplate.getForObject(uri, Map.class);
+            if(s == null){
+                return "";
+            }
+            if(!s.containsKey("c")){
+                return "";
+            }
             return s.get("c").toString();
         } catch (URISyntaxException e) {
             // TODO Auto-generated catch block

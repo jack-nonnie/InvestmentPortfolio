@@ -14,13 +14,13 @@
     <table class = "table table-striped table-responsive-md">
         <thead>
             <tr>
-                <th>Ticker</th>
-                <th>Current Price</th> 
-                <th>Amount Owned</th>
-                <th>Current Valuation</th>
-                <th>Price Paid</th>
-                <th>Profit/loss</th>
-                <th></th>    
+                <th id="ticker">Ticker</th>
+                <th id="currentPrice">Current Price</th> 
+                <th id="amountOwned">Amount Owned</th>
+                <th id="currentValuation">Current Valuation</th>
+                <th id="pricePaid">Price Paid</th>
+                <th id="profitLoss">Profit/loss</th>
+                <th id="blank"></th>    
             </tr>
         </thead> 
         <tbody>
@@ -34,12 +34,12 @@
                 <td><a th:href = "@{/trade/{id}(id=${position.getTicker()})}" class="btn btn-primary btn-sm mb-3"> Trade </a></td>
             </tr>
             <tr>
-                <td><b>Total</b></td>
-                <td><b>N/A</b></td>
-                <td><b>N/A</b></td>
-                <td> <b th:text="${#numbers.formatCurrency(totalValuation)}"></b></td>
-                <td><b th:text="${#numbers.formatCurrency(totalInitialPrice)}"></b></td>
-                <td><b th:text="${totalProfitLoss}"></b></td>
+                <td><strong>Total</strong></td>
+                <td><strong>N/A</strong></td>
+                <td><strong>N/A</strong></td>
+                <td> <strong th:text="${#numbers.formatCurrency(totalValuation)}"></strong></td>
+                <td><strong th:text="${#numbers.formatCurrency(totalInitialPrice)}"></strong></td>
+                <td><strong th:text="${totalProfitLoss}"></strong></td>
                 <td> </td>
                 
             </tr>
@@ -48,7 +48,7 @@
     </table>
     <div class ="container">
         <h3>Cash Available</h3>
-        <p><b th:text="${#numbers.formatCurrency(cashBalance)}"></b></p>
+        <p><strong th:text="${#numbers.formatCurrency(cashBalance)}"></strong></p>
         <form action="#" th:action="@{/deposit}" th:object="${cash}"
 			method="POST">
             <input type="text" th:field="*{amount}"
