@@ -28,19 +28,19 @@
 		<table th:if="${results.size() > 0}" class = "table table-striped table-responsive-md">
 			<thead>
 				<tr >
-					<th>Stock Ticker</th>
-					<th>Current Price</th>
-					<th>52 Week Low</th>
-					<th>52 Week High</th>
-					<th>Beta</th>
-					<th>Book Value Per Share</th>
-					<th>Dividends Per Share</th>
-					<th>Earnings Per Share Normalized</th>
-					<th>Market Cap</th>
-					<th>Price to Earnings Normalized</th>
-					<th>ROI Annual</th>
-					<th>Debt to Equity</th>
-					<th></th>
+					<th id="stockTicker">Stock Ticker</th>
+					<th id="currentPriceQuote">Current Price</th>
+					<th id="low">52 Week Low</th>
+					<th id="high">52 Week High</th>
+					<th id="beta">Beta</th>
+					<th id="bookValuePerShareAnnual">Book Value Per Share</th>
+					<th id="dividendPerShareAnnual">Dividends Per Share</th>
+					<th id="epsNormalizedAnnual">Earnings Per Share Normalized</th>
+					<th id="marketCapitalization">Market Cap</th>
+					<th id="peNormalizedAnnual">Price to Earnings Normalized</th>
+					<th id="roiAnnual">ROI Annual</th>
+					<th id="debtToEquity">Debt to Equity</th>
+					<th id="blank"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -61,52 +61,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<!--<table border="1" class = "table table-striped table-responsive-md">
-			<thead>
-				<tr>
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=symbol&sortDir=' + ${reverseSortDir}}">
-							Symbol</a>
-					</th>
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}}">Price</a>
-					</th>
-					<th> Actions </th>
-				</tr>
-			</thead> 
-			<tbody>
-				<tr th:each="stock : ${listStocks}">
-					<td th:text="${stock.symbol}"></td>
-					<td th:text="${stock.price}"></td>
-					<td><a th:href="@{/trade/}" class="btn btn-primary">Trade</a>
-					 <td><a th:href="@{/trade/{id}(id=${stock.id})}" class="btn btn-primary">Trade</a> 
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<div th:if = "${totalPages > 1}">
-			<div class = "row col-sm-10">
-				<div class = "col-sm-2">
-					Total Rows: [[${totalItems}]] 
-				</div>
-				<div class = "col-sm-1">
-					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-					</span>
-				</div>
-				<div class = "col-sm-1">
-					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-					<span th:unless="${currentPage < totalPages}">Next</span>
-				</div>
-				
-				 <div class="col-sm-1">
-    				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-					<span th:unless="${currentPage < totalPages}">Last</span>
-   				 </div>
-			</div>
-		</div>-->
 	</div>
 </body>
 </html>
