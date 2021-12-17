@@ -40,6 +40,12 @@ public class TradeController {
 			trade.setPrice(stock.get("currentPrice").toString());
 			trade.setInstrument("stock");
 		}
+		if(type.equals("curr")){
+			Map<String, Object> curr = searchService.searchCurr(search);
+			trade.setSymbol(id.toUpperCase());
+			trade.setPrice(curr.get("price").toString());
+			trade.setInstrument("curr");
+		}
 		else{
 			Map<String, Object> crypto = searchService.searchCrypto(search);
 			trade.setSymbol(id.toUpperCase());

@@ -21,6 +21,9 @@ public class TradeServiceImpl implements TradeService {
 	@Value("${cryptoKey}")
     private String cryptoKey;
 
+	@Value("${currKey}")
+    private String currKey;
+
 	@Autowired
 	private TradeRepository tradeRepository;
 
@@ -50,6 +53,9 @@ public class TradeServiceImpl implements TradeService {
 				Position p;
 				if(trades.get(i).getInstrument().equals("stock")){
 					p = new Position(trades.get(i).getSymbol(), trades.get(i).getAmount(), trades.get(i).getCash(), "stock", this.apiKey);
+				}
+				if(trades.get(i).getInstrument().equals("curr")){
+					p = new Position(trades.get(i).getSymbol(), trades.get(i).getAmount(), trades.get(i).getCash(), "curr", this.currKey);
 				}
 				else{
 					p = new Position(trades.get(i).getSymbol(), trades.get(i).getAmount(), trades.get(i).getCash(), "crypto", this.cryptoKey);
