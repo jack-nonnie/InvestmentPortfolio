@@ -126,9 +126,28 @@ public class Position {
         }
     }
 
+    public String setCurrentPriceCurr(String apiKey){
+        String str = "https://web-services.oanda.com/rates/api/v1/rates/" + this.ticker + ".json?api_key=" + apiKey + "&quote=usd";
+        URI uri;
+        try {
+            uri = new URI(str);
+            RestTemplate currRestTemplate = new RestTemplate();
+            Map<String, Map<String, Map<String, Object>>> currMap = currRestTemplate.getForObject(uri, Map.class);
+            if(currMap == null){
+                return "0";
+            }
+            return currMap.get("quotes").get("USD").get("ask").toString();
+        } catch (URISyntaxException e) {
+            return "0";
+        }
+    }
+
     public String setCurrentPrice(String apiKey){
         if(this.instrument.equals("stock")){
             return this.setCurrentPriceStock(apiKey);
+        }
+        else if(this.instrument.equals("curr")) {
+            return this.setCurrentPriceCurr(apiKey);
         }
         else{
             return this.setCurrentPriceCrypto(apiKey);

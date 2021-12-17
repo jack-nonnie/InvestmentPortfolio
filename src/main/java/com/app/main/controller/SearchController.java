@@ -23,6 +23,7 @@ public class SearchController {
         model.addAttribute("search", search);
         model.addAttribute("results", new ArrayList<Map<String,Object>>());
         model.addAttribute("cryptoResults", new ArrayList<Map<String,Object>>());
+        model.addAttribute("currResults", new ArrayList<Map<String,Object>>());
         return "index";
     }
     @PostMapping("/search")
@@ -37,6 +38,7 @@ public class SearchController {
         r.add(result);
         model.addAttribute("results", r);
         model.addAttribute("cryptoResults", new ArrayList<Map<String,Object>>());
+        model.addAttribute("currResults", new ArrayList<Map<String,Object>>());
         return "index";
     }
     @PostMapping("/cryptoSearch")
@@ -51,6 +53,22 @@ public class SearchController {
         model.addAttribute("search", search);
         model.addAttribute("results", new ArrayList<Map<String,Object>>());
         model.addAttribute("cryptoResults", cryptoResults);
+        model.addAttribute("currResults", new ArrayList<Map<String,Object>>());
+        return "index";
+    }
+    @PostMapping("/currSearch")
+    public String currSearch(Model model, @ModelAttribute("search") Search search){
+        Map<String, Object> curr = searchService.searchCurr(search);
+        if(curr.size() <= 1){
+            model.addAttribute("errorMessage", "The currency you searched for cannot be found. Please try again.");
+            return "error";
+        }
+        ArrayList<Map<String,Object>> currResults = new ArrayList<Map<String,Object>>();
+        currResults.add(curr);
+        model.addAttribute("search", search);
+        model.addAttribute("results", new ArrayList<Map<String,Object>>());
+        model.addAttribute("cryptoResults", new ArrayList<Map<String,Object>>());
+        model.addAttribute("currResults", currResults);
         return "index";
     }
 }

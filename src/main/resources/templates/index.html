@@ -15,26 +15,38 @@
 		function toggleCryptoButton() {
 			document.getElementById('cryptoButton').disabled = (document.getElementById('cryptoSearch').value === "");
 		}
+		function toggleCurrButton() {
+			document.getElementById('currButton').disabled = (document.getElementById('currSearch').value === "");
+		}
 	</script>
 </head>
 <body>
 
 	<div class="container my-2">
+
 		<h1>Stock Search</h1>
-		
 		<a th:href = "@{/portfolio}" class="btn btn-primary btn-sm mb-3"> Portfolio </a>
 		<form action="#" th:action="@{/search}" th:object="${search}" method="POST">
 			<input id="search" type="text" th:field="*{str}"
 				placeholder="Stock Search" class="form-control mb-4 col-4" onchange="toggleButton()">
 			<button id="button" type="submit" class="btn btn-info col-2" disabled> Search</button>
 		</form>
+		<br>
+
 		<h1>Crypto Search</h1>
-		
 		<form action="#" th:action="@{/cryptoSearch}" th:object="${search}" method="POST">
 			<input id="cryptoSearch" type="text" th:field="*{str}"
 				placeholder="Crypto Search" class="form-control mb-4 col-4" onchange="toggleCryptoButton()">
 			<button id="cryptoButton" type="submit" class="btn btn-info col-2" disabled> Search</button>
 		</form>
+
+		<h1>Currency Search</h1>
+		<form action="#" th:action="@{/currSearch}" th:object="${search}" method="POST">
+			<input id="currSearch" type="text" th:field="*{str}"
+				placeholder="Currency Search" class="form-control mb-4 col-4" onchange="toggleCurrButton()">
+			<button id="currButton" type="submit" class="btn btn-info col-2" disabled> Search</button>
+		</form>
+
 		<table th:if="${results.size() > 0}" class = "table table-striped table-responsive-md">
 			<thead>
 				<tr >
@@ -94,6 +106,22 @@
 					<td th:text="${cryptoResult.get('max_supply')}"></td>
 					<td th:text="${cryptoResult.get('market_cap')}"></td>
 					<td><a th:href = "@{'/trade/' + ${cryptoResult.get('symbol')} + '/crypto'}" class="btn btn-primary btn-sm mb-3"> Trade </a></td>
+				</tr>
+			</tbody>
+		</table>
+		<table th:if="${currResults.size() > 0}" class = "table table-striped table-responsive-md">
+			<thead>
+				<tr >
+					<th id="symbol">Symbol</th>
+					<th id="price">Price</th>
+					<th id="currBlank"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="currResult : ${currResults}">
+					<td th:text="${currResult.get('symbol')}"></td>
+					<td th:text="${currResult.get('price')}"></td>
+					<td><a th:href = "@{'/trade/' + ${currResult.get('symbol')} + '/curr'}" class="btn btn-primary btn-sm mb-3"> Trade </a></td>
 				</tr>
 			</tbody>
 		</table>

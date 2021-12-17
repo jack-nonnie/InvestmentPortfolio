@@ -20,6 +20,9 @@ public class SearchServiceImpl implements SearchService{
 
     @Value("${cryptoKey}")
     private String cryptoKey;
+
+    @Value("${currKey}")
+    private String currKey;
     
     @Override
     public Map<String, Object> searchStock(Search search){
@@ -78,6 +81,26 @@ public class SearchServiceImpl implements SearchService{
             
             map.put("price", coinMap.get("data").get(search.getStr().toUpperCase()).get("quote").get("USD").get("price"));
             map.put("market_cap", coinMap.get("data").get(search.getStr().toUpperCase()).get("quote").get("USD").get("market_cap"));
+            return map;
+        } catch (URISyntaxException | HttpClientErrorException.BadRequest  e) {
+            return map;
+        }
+        
+    }
+    @Override
+    public Map<String, Object> searchCurr(Search search){
+        String str = "https://web-services.oanda.com/rates/api/v1/rates/" + search.getStr() + ".json?api_key=" + currKey + "&quote=usd";
+        URI uri;
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            uri = new URI(str);
+            RestTemplate currRestTemplate = new RestTemplate();
+            Map<String, Map<String, Map<String, Object>>> currMap = currRestTemplate.getForObject(uri, Map.class);
+            if(currMap == null){
+                return map;
+            }
+            map.put("symbol", search.getStr().toUpperCase());
+            map.put("price", currMap.get("quotes").get("USD").get("ask"));
             return map;
         } catch (URISyntaxException | HttpClientErrorException.BadRequest  e) {
             return map;
