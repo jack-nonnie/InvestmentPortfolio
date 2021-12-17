@@ -28,15 +28,24 @@ public class TradeController {
 	@Autowired 
 	private CashService cashService;
 
-	@GetMapping("/trade/{id}")  // {id}")
-	public String trade(@PathVariable ( value = "id") String id, Model model) {
+	@GetMapping("/trade/{id}/{type}")  // {id}")
+	public String trade(@PathVariable ( value = "id") String id, @PathVariable ( value = "type") String type, Model model) {
 		// create model attribute to bind form data
 		Search search = new Search();
 		search.setStr(id);
-		Map<String, Object> stock = searchService.searchStock(search);
 		Trade trade = new Trade();
-		trade.setSymbol(id.toUpperCase());
-		trade.setPrice(stock.get("currentPrice").toString());
+		if(type.equals("stock")){
+			Map<String, Object> stock = searchService.searchStock(search);
+			trade.setSymbol(id.toUpperCase());
+			trade.setPrice(stock.get("currentPrice").toString());
+			trade.setInstrument("stock");
+		}
+		else{
+			Map<String, Object> crypto = searchService.searchCrypto(search);
+			trade.setSymbol(id.toUpperCase());
+			trade.setPrice(crypto.get("price").toString());
+			trade.setInstrument("crypto");
+		}
 		model.addAttribute("trade", trade);
 		return "trade";
 	}

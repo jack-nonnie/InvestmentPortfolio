@@ -43,6 +43,9 @@
 			<label for="symbol">Current Price: </label>	
 			<input id="price" type="text" th:field="*{price}" class="form-control mb-4 col-4" readonly>
 			
+			<label for="symbol">Instrument </label>
+			<input id="instument" type="text" th:field="*{instrument}" class="form-control mb-4 col-4" readonly>
+
 			<label for="symbol">Cash Amount: </label>
 			<input id="cash" type="text" th:field="*{cash}" class="form-control mb-4 col-4" onchange="updateAmount()">
 

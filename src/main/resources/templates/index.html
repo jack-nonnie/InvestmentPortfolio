@@ -12,6 +12,9 @@
 		function toggleButton() {
 			document.getElementById('button').disabled = (document.getElementById('search').value === "");
 		}
+		function toggleCryptoButton() {
+			document.getElementById('cryptoButton').disabled = (document.getElementById('cryptoSearch').value === "");
+		}
 	</script>
 </head>
 <body>
@@ -24,6 +27,13 @@
 			<input id="search" type="text" th:field="*{str}"
 				placeholder="Stock Search" class="form-control mb-4 col-4" onchange="toggleButton()">
 			<button id="button" type="submit" class="btn btn-info col-2" disabled> Search</button>
+		</form>
+		<h1>Crypto Search</h1>
+		
+		<form action="#" th:action="@{/cryptoSearch}" th:object="${search}" method="POST">
+			<input id="cryptoSearch" type="text" th:field="*{str}"
+				placeholder="Crypto Search" class="form-control mb-4 col-4" onchange="toggleCryptoButton()">
+			<button id="cryptoButton" type="submit" class="btn btn-info col-2" disabled> Search</button>
 		</form>
 		<table th:if="${results.size() > 0}" class = "table table-striped table-responsive-md">
 			<thead>
@@ -57,7 +67,33 @@
 					<td th:text="${result.get('peNormalizedAnnual')}"></td>
 					<td th:text="${result.get('roiAnnual')}"></td>
 					<td th:text="${result.get('totalDebt/totalEquityAnnual')}"></td>
-					<td><a th:href = "@{/trade/{id}(id=${result.get('ticker')})}" class="btn btn-primary btn-sm mb-3"> Trade </a></td>
+					<td><a th:href = "@{'/trade/'+ ${result.get('ticker')} + '/stock'}" class="btn btn-primary btn-sm mb-3"> Trade </a></td>
+				</tr>
+			</tbody>
+		</table>
+		<table th:if="${cryptoResults.size() > 0}" class = "table table-striped table-responsive-md">
+			<thead>
+				<tr >
+					<th id="symbol">Symbol</th>
+					<th id="name">Name</th>
+					<th id="price">Price</th>
+					<th id="circulatingSupply">Circulating Supply</th>
+					<th id="totalSupply">Total Supply</th>
+					<th id="maxSupply">Max Supply</th>
+					<th id="marketCapitalization">Market Cap</th>
+					<th id="cryptoBlank"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cryptoResult : ${cryptoResults}">
+					<td th:text="${cryptoResult.get('symbol')}"></td>
+					<td th:text="${cryptoResult.get('name')}"></td>
+					<td th:text="${cryptoResult.get('price')}"></td>
+					<td th:text="${cryptoResult.get('circulating_supply')}"></td>
+					<td th:text="${cryptoResult.get('total_supply')}"></td>
+					<td th:text="${cryptoResult.get('max_supply')}"></td>
+					<td th:text="${cryptoResult.get('market_cap')}"></td>
+					<td><a th:href = "@{'/trade/' + ${cryptoResult.get('symbol')} + '/crypto'}" class="btn btn-primary btn-sm mb-3"> Trade </a></td>
 				</tr>
 			</tbody>
 		</table>

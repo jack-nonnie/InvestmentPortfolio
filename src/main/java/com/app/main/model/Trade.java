@@ -30,6 +30,9 @@ public class Trade {
     @Column(name = "type")
 	private String type;
 
+    @Column(name = "instrument")
+    private String instrument;
+
     public String getType() {
         return this.type;
     }
@@ -76,5 +79,13 @@ public class Trade {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String getInstrument(){
+        return this.instrument;
+    }
+
+    public void setInstrument(String instrument){
+        this.instrument = instrument;
     }
 }

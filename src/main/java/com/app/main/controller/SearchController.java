@@ -22,6 +22,7 @@ public class SearchController {
         Search search = new Search();
         model.addAttribute("search", search);
         model.addAttribute("results", new ArrayList<Map<String,Object>>());
+        model.addAttribute("cryptoResults", new ArrayList<Map<String,Object>>());
         return "index";
     }
     @PostMapping("/search")
@@ -32,13 +33,24 @@ public class SearchController {
             return "error";
         }
         result.put("ticker", search.getStr());
-        ArrayList<Map<String, Object>> r = (ArrayList<Map<String, Object>>) model.getAttribute("results");
-        if(r == null){
-            r = new ArrayList<Map<String,Object>>();
-        }
-        
+        ArrayList<Map<String, Object>> r = new ArrayList<Map<String,Object>>(); 
         r.add(result);
         model.addAttribute("results", r);
+        model.addAttribute("cryptoResults", new ArrayList<Map<String,Object>>());
+        return "index";
+    }
+    @PostMapping("/cryptoSearch")
+    public String cryptoSearch(Model model, @ModelAttribute("search") Search search){
+        Map<String, Object> crypto = searchService.searchCrypto(search);
+        if(crypto.size() <= 1){
+            model.addAttribute("errorMessage", "The coin you searched for cannot be found. Please try a different coin.");
+            return "error";
+        }
+        ArrayList<Map<String,Object>> cryptoResults = new ArrayList<Map<String,Object>>();
+        cryptoResults.add(crypto);
+        model.addAttribute("search", search);
+        model.addAttribute("results", new ArrayList<Map<String,Object>>());
+        model.addAttribute("cryptoResults", cryptoResults);
         return "index";
     }
 }

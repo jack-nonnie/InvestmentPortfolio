@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>Portfolio Page</h1> 
-    <h3>Stocks</h3>
+    <h3>Positions</h3>
     <table class = "table table-striped table-responsive-md">
         <thead>
             <tr>
@@ -20,6 +20,7 @@
                 <th id="currentValuation">Current Valuation</th>
                 <th id="pricePaid">Price Paid</th>
                 <th id="profitLoss">Profit/loss</th>
+                <th id="instrument">Instrument</th>
                 <th id="blank"></th>    
             </tr>
         </thead> 
@@ -31,7 +32,11 @@
                 <td th:text="${#numbers.formatCurrency(position.getValuation())}"></td>
                 <td th:text="${#numbers.formatCurrency(position.getInitialPrice())}"></td>
                 <td th:text="${position.getProfitLoss()}"></td>
-                <td><a th:href = "@{/trade/{id}(id=${position.getTicker()})}" class="btn btn-primary btn-sm mb-3"> Trade </a></td>
+                <td th:text="${position.getInstrument()}"></td>
+                <td>
+                    <a th:if="${position.getInstrument().equals('stock')}" th:href = "@{'/trade/'+ ${position.getTicker()} + '/stock'}" class="btn btn-primary btn-sm mb-3"> Trade </a>
+                    <a th:unless="${position.getInstrument().equals('stock')}" th:href = "@{'/trade/' + ${position.getTicker()} + '/crypto'}" class="btn btn-primary btn-sm mb-3"> Trade </a>
+                </td>
             </tr>
             <tr>
                 <td><strong>Total</strong></td>
@@ -40,6 +45,7 @@
                 <td> <strong th:text="${#numbers.formatCurrency(totalValuation)}"></strong></td>
                 <td><strong th:text="${#numbers.formatCurrency(totalInitialPrice)}"></strong></td>
                 <td><strong th:text="${totalProfitLoss}"></strong></td>
+                <td><strong>N/A</strong></td>
                 <td> </td>
                 
             </tr>

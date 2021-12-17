@@ -16,15 +16,18 @@ public class Position {
     private String initialPrice;
 
     private String currentPrice;
+    
+    private String instrument;
 
     public Position() {
 
     }
 
-    public Position(String ticker, String amount, String initialPrice, String apiKey) {
+    public Position(String ticker, String amount, String initialPrice, String instrument, String apiKey) {
         this.ticker = ticker;
         this.amount = amount;
         this.initialPrice = initialPrice;
+        this.instrument = instrument;
         this.currentPrice = this.setCurrentPrice(apiKey);
     }
 
@@ -55,6 +58,14 @@ public class Position {
         this.initialPrice = initialPrice;
     }
 
+    public String getInstrument(){
+        return this.instrument;
+    }
+
+    public void setInstrument(String instrument){
+        this.instrument = instrument;
+    }
+
     public void addTradeToPosition(String amount, String price) {
         float amt = Float.parseFloat(amount) + Float.parseFloat(this.amount);
         this.amount = String.valueOf(amt);
@@ -68,7 +79,7 @@ public class Position {
         String val = this.getValuation();
         return String.format("%.2f",100 *(Double.parseDouble(val) - Double.parseDouble(this.initialPrice))/Double.parseDouble(this.initialPrice)) + "%";
     }
-    public String setCurrentPrice(String apiKey) {
+    public String setCurrentPriceStock(String apiKey) {
         
         String str = "https://finnhub.io/api/v1/quote?symbol=" + this.ticker + "&token=" + apiKey;
         try { 
@@ -83,8 +94,44 @@ public class Position {
             }
             return s.get("c").toString();
         } catch (URISyntaxException e) {
-            // TODO Auto-generated catch block
             return "0";
+        }
+    }
+
+    public String setCurrentPriceCrypto(String apiKey){
+        String str = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=" + this.ticker + "&CMC_PRO_API_KEY=" + apiKey;
+        URI uri;
+        try {
+            uri = new URI(str);
+            RestTemplate coinRestTemplate = new RestTemplate();
+            Map<String, Map<String, Map<String, Map<String, Map<String, Object>>>>> coinMap = coinRestTemplate.getForObject(uri, Map.class);
+            if(coinMap == null){
+                return "0";
+            }
+            if(coinMap.get("data") == null){
+                return "0";
+            }
+            if(coinMap.get("data").get(this.ticker) == null){
+                return "0";
+            }
+            if(coinMap.get("data").get(this.ticker).get("quote") == null){
+                return "0";
+            }
+            if(coinMap.get("data").get(this.ticker).get("quote").get("USD") == null){
+                return "0";
+            }
+            return coinMap.get("data").get(this.ticker).get("quote").get("USD").get("price").toString();
+        } catch (URISyntaxException e) {
+            return "0";
+        }
+    }
+
+    public String setCurrentPrice(String apiKey){
+        if(this.instrument.equals("stock")){
+            return this.setCurrentPriceStock(apiKey);
+        }
+        else{
+            return this.setCurrentPriceCrypto(apiKey);
         }
     }
 
