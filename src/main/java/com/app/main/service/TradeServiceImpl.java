@@ -54,7 +54,7 @@ public class TradeServiceImpl implements TradeService {
 				if(trades.get(i).getInstrument().equals("stock")){
 					p = new Position(trades.get(i).getSymbol(), trades.get(i).getAmount(), trades.get(i).getCash(), "stock", this.apiKey);
 				}
-				if(trades.get(i).getInstrument().equals("curr")){
+				else if(trades.get(i).getInstrument().equals("curr")){
 					p = new Position(trades.get(i).getSymbol(), trades.get(i).getAmount(), trades.get(i).getCash(), "curr", this.currKey);
 				}
 				else{

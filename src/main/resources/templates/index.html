@@ -28,7 +28,7 @@
 		<a th:href = "@{/portfolio}" class="btn btn-primary btn-sm mb-3"> Portfolio </a>
 		<form action="#" th:action="@{/search}" th:object="${search}" method="POST">
 			<input id="search" type="text" th:field="*{str}"
-				placeholder="Stock Search" class="form-control mb-4 col-4" onchange="toggleButton()">
+				placeholder="Stock Ticker Search" class="form-control mb-4 col-4" onchange="toggleButton()">
 			<button id="button" type="submit" class="btn btn-info col-2" disabled> Search</button>
 		</form>
 		<br>
@@ -36,14 +36,14 @@
 		<h1>Crypto Search</h1>
 		<form action="#" th:action="@{/cryptoSearch}" th:object="${search}" method="POST">
 			<input id="cryptoSearch" type="text" th:field="*{str}"
-				placeholder="Crypto Search" class="form-control mb-4 col-4" onchange="toggleCryptoButton()">
+				placeholder="Crypto Ticker Search" class="form-control mb-4 col-4" onchange="toggleCryptoButton()">
 			<button id="cryptoButton" type="submit" class="btn btn-info col-2" disabled> Search</button>
 		</form>
 
 		<h1>Currency Search</h1>
 		<form action="#" th:action="@{/currSearch}" th:object="${search}" method="POST">
 			<input id="currSearch" type="text" th:field="*{str}"
-				placeholder="Currency Search" class="form-control mb-4 col-4" onchange="toggleCurrButton()">
+				placeholder="Currency Ticker Search" class="form-control mb-4 col-4" onchange="toggleCurrButton()">
 			<button id="currButton" type="submit" class="btn btn-info col-2" disabled> Search</button>
 		</form>
 

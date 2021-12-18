@@ -35,7 +35,8 @@
                 <td th:text="${position.getInstrument()}"></td>
                 <td>
                     <a th:if="${position.getInstrument().equals('stock')}" th:href = "@{'/trade/'+ ${position.getTicker()} + '/stock'}" class="btn btn-primary btn-sm mb-3"> Trade </a>
-                    <a th:unless="${position.getInstrument().equals('stock')}" th:href = "@{'/trade/' + ${position.getTicker()} + '/crypto'}" class="btn btn-primary btn-sm mb-3"> Trade </a>
+                    <a th:if="${position.getInstrument().equals('crypto')}" th:href = "@{'/trade/' + ${position.getTicker()} + '/crypto'}" class="btn btn-primary btn-sm mb-3"> Trade </a>
+                    <a th:if="${position.getInstrument().equals('curr')}" th:href = "@{'/trade/' + ${position.getTicker()} + '/curr'}" class="btn btn-primary btn-sm mb-3"> Trade </a>
                 </td>
             </tr>
             <tr>
@@ -59,7 +60,8 @@
 			method="POST">
             <input type="text" th:field="*{amount}"
 				placeholder="Amount to Deposit" class="form-control mb-4 col-4">
-            <button type="submit" class="btn btn-info col-2"> Deposit</button>
+            <button type="submit" name="cashTransaction" value="deposit" class="btn btn-info col-2"> Deposit</button>
+            <button type="submit" name="cashTransaction" value="withdrawl" th:formaction="@{/withdrawl}" class="btn btn-info col-2"> Withdrawl</button>
         </form>
     </div>
     <hr>

@@ -40,7 +40,7 @@ public class TradeController {
 			trade.setPrice(stock.get("currentPrice").toString());
 			trade.setInstrument("stock");
 		}
-		if(type.equals("curr")){
+		else if(type.equals("curr")){
 			Map<String, Object> curr = searchService.searchCurr(search);
 			trade.setSymbol(id.toUpperCase());
 			trade.setPrice(curr.get("price").toString());
@@ -81,11 +81,11 @@ public class TradeController {
 		else{
 			Position position = tradeService.getPositionOfSell(trade);
 			if(position == null){
-				model.addAttribute(errorMessage, "You do not own this stock.");
+				model.addAttribute(errorMessage, "You do not own this asset.");
 				return error;
 			}
 			if(Double.parseDouble(position.getAmount()) < Double.parseDouble(trade.getAmount())){
-				model.addAttribute(errorMessage, "You tried to sell more of this stock than you currently own");
+				model.addAttribute(errorMessage, "You tried to sell more of this asset than you currently own");
 				return error;
 			}
 			Cash deposit = new Cash();

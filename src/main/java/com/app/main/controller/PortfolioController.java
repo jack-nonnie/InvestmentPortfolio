@@ -49,7 +49,18 @@ public class PortfolioController {
 	}
 
 	@PostMapping("/deposit")
-	public String deposit(@ModelAttribute("cash") Cash cash){
+	public String deposit(@ModelAttribute("cash") Cash cash, Model model){
+		cashService.enterTransaction(cash);
+		return "redirect:/portfolio";
+	}
+	@PostMapping("/withdrawl")
+	public String withdrawl(@ModelAttribute("cash") Cash cash, Model model){
+		double cashBalance = cashService.getBalance();
+		if(cash.getAmount() > cashBalance){
+			model.addAttribute("errorMessage", "You tried to withdrawl more money than you currently have in your account. Please reduce the amount you are trying to withdrawl");
+			return "error";
+		}
+		cash.setAmount(-1 * cash.getAmount());
 		cashService.enterTransaction(cash);
 		return "redirect:/portfolio";
 	}
